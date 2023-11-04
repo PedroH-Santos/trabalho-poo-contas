@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TrabFinalPOO.Source
+{
+    public class Immobile
+    {
+        private Address address;
+        private string name;
+        private double area;
+        private double width;
+        private double height;
+        private double length;
+        private double value;
+        private Customer customer;
+       
+        public Immobile(Address address, string name, double width, double height, double length, double value, Customer customer)
+        {
+            this.address = address;
+            this.name = name;
+            this.width = width;
+            this.height = height;
+            this.length = length;
+            this.value = value;
+            this.customer = customer;
+        }
+
+        public Address getAddress() { return this.address; }
+        public string getName() { return this.name; }
+        public double getArea() { return this.area;}
+        public double getWidth() { return this.width;}
+        public double getHeight() { return this.height;}
+        public double getLength() { return this.length;}
+        public double getValue() { return this.value; }
+        public Customer getCustomer() { return this.customer;}
+
+        public void SetAddress(Address address) { this.address = address;}
+        public void SetName(string name) {  this.name = name; }
+        public void SetArea(double area) { 
+            if(this.length == 0 || this.width== 0 || this.height == 0)
+            {
+                throw new Exception("Para calcular a área é preciso determinar os valores da altura, largura e comprimento do imóvel");
+            }
+            
+            this.area = area; 
+        }
+        public void SetWidth(double width) {  this.width = width; }
+        public void SetHeight(double height) {  this.height = height; }
+        public void SetLength(double length) {  this.length = length; }
+        public void SetValue(double value) {  this.value = value; }
+        public void SetCustomer(Customer customer) {  this.customer = customer; }
+           
+    }
+}
