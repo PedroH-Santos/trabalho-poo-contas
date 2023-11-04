@@ -1,0 +1,2 @@
+1|Rio Xingu|32280160|Riacho das Pedras|Contagem|Brasil|1
+2|Rua Abobora|28534310|Barreiro|Belo Horizonte|Brasil|2
