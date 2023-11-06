@@ -22,17 +22,16 @@ namespace TrabFinalPOO.Source
 
         public double GetAdditionalValue() { return additionalValue;}
         public double GetTariffEnergy() {  return tariffEnergy;}
+        public void SetAdditionalValue(double additionalValue) { this.additionalValue = additionalValue; }
         public void SetTariffEnergy(string typeCustomer) {
             double valueTariffEnergy = 0;
-        
+            if(t)
             if (typeCustomer == CustomerType.TIPO_RESIDENCIAL || typeCustomer == CustomerType.TIPO_RESIDENCIAL_SOCIAL)
             {
                 valueTariffEnergy = 0.46;
             }else if(typeCustomer == CustomerType.TIPO_COMERCIAL)
             {
                 valueTariffEnergy = 0.41;
-            }else {
-                throw new Exception("O Tipo de cliente não existe");
             }
             this.tariffEnergy = valueTariffEnergy; 
         }

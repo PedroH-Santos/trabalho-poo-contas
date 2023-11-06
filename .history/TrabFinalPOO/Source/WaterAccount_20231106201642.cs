@@ -31,19 +31,9 @@ namespace TrabFinalPOO.Source
         {
             double currentWaterConsumption = this.GetConsumption();
             double currentSewagerConsumption = this.GetConsumptionSewage();
-            if (typeCustomer == CustomerType.TIPO_RESIDENCIAL || typeCustomer == CustomerType.TIPO_RESIDENCIAL_SOCIAL)
+            if (typeCustomer == CustomerType.TIPO_RESIDENCIAL)
             {
-                if (currentWaterConsumption > 0)
-                {
-                    this.tariffWater.push(10.08);
-                }
-                if (currentWaterConsumption >= 6 && currentWaterConsumption < 10)
-                {
-                    this.tariffWater.push(2.241);
-                    currentWaterConsumption -= 10;
-
-                }
-                if (currentWaterConsumption >= 10 && currentWaterConsumption < 15)
+                if (currentWaterConsumption > 10 && currentWaterConsumption < 15)
                 {
                     this.tariffWater.push(5.447);
                 }
@@ -81,6 +71,16 @@ namespace TrabFinalPOO.Source
                 if (currentWaterConsumption >= 100)
                 {
                     this.tariffWater.push(8.329) ;
+                }
+            }
+            else if (typeCustomer == CustomerType.TIPO_RESIDENCIAL_SOCIAL)
+            {
+                if (currentWaterConsumption > 0 && currentWaterConsumption < 6)
+                {
+                    this.tariffWater.push(10.08);
+                }
+                if(currentWaterConsumption > 6 && currentWaterConsumption < 10) {
+                    this.tariffWater.push(2.241 );
                 }
             }
             else

@@ -37,13 +37,11 @@ namespace TrabFinalPOO.Source
                 {
                     this.tariffWater.push(10.08);
                 }
-                if (currentWaterConsumption >= 6 && currentWaterConsumption < 10)
+                if (currentWaterConsumption > 6 && currentWaterConsumption < 10)
                 {
                     this.tariffWater.push(2.241);
-                    currentWaterConsumption -= 10;
-
                 }
-                if (currentWaterConsumption >= 10 && currentWaterConsumption < 15)
+                if (currentWaterConsumption > 10 && currentWaterConsumption < 15)
                 {
                     this.tariffWater.push(5.447);
                 }

@@ -31,56 +31,55 @@ namespace TrabFinalPOO.Source
         {
             double currentWaterConsumption = this.GetConsumption();
             double currentSewagerConsumption = this.GetConsumptionSewage();
-            if (typeCustomer == CustomerType.TIPO_RESIDENCIAL || typeCustomer == CustomerType.TIPO_RESIDENCIAL_SOCIAL)
+            if (typeCustomer == CustomerType.TIPO_RESIDENCIAL)
             {
-                if (currentWaterConsumption > 0)
-                {
-                    this.tariffWater.push(10.08);
-                }
-                if (currentWaterConsumption >= 6 && currentWaterConsumption < 10)
-                {
-                    this.tariffWater.push(2.241);
-                    currentWaterConsumption -= 10;
-
-                }
-                if (currentWaterConsumption >= 10 && currentWaterConsumption < 15)
+                if (currentWaterConsumption > 10 && currentWaterConsumption < 15)
                 {
                     this.tariffWater.push(5.447);
                 }
-                if (currentWaterConsumption >= 15 && currentWaterConsumption < 20)
+                else if (currentWaterConsumption >= 15 && currentWaterConsumption < 20)
                 {
-                    this.tariffWater.push(5.461) ;
+                    this.tariffWater.push(5.461 ;
                 }
-                if (currentWaterConsumption >= 20 && currentWaterConsumption < 40)
+                else if (currentWaterConsumption >= 20 && currentWaterConsumption < 40)
                 {
-                    this.tariffWater.push(5.487);
+                    this.tariffWater.push(5.487 ;
                 }
-                if (currentWaterConsumption >= 40)
+                else if (currentWaterConsumption >= 40)
                 {
-                    this.tariffWater.push(10.066) ;
+                    this.tariffWater.push(10.066 ;
                 }
             }
             else if (typeCustomer == CustomerType.TIPO_COMERCIAL)
             {
                 if (currentWaterConsumption > 0 && currentWaterConsumption < 6)
                 {
-                    this.tariffWater.push(25.79);
+                    this.tariffWater.push(25.79;
                 }
-                if (currentWaterConsumption >= 6 && currentWaterConsumption < 10)
+                else if (currentWaterConsumption >= 6 && currentWaterConsumption < 10)
                 {
-                    this.tariffWater.push(4.299) ;
+                    this.tariffWater.push(4.299 ;
                 }
-                if (currentWaterConsumption >= 10 && currentWaterConsumption < 40)
+                else if (currentWaterConsumption >= 10 && currentWaterConsumption < 40)
                 {
-                    this.tariffWater.push(8.221) ;
+                    this.tariffWater.push(8.221 ;
                 }
-                if (currentWaterConsumption >= 40 && currentWaterConsumption < 100)
+                else if (currentWaterConsumption >= 40 && currentWaterConsumption < 100)
                 {
-                    this.tariffWater.push(8.288) ;
+                    this.tariffWater.push(8.288 ;
                 }
-                if (currentWaterConsumption >= 100)
+                else if (currentWaterConsumption >= 100)
                 {
-                    this.tariffWater.push(8.329) ;
+                    this.tariffWater.push(8.329 ;
+                }
+            }
+            else if (typeCustomer == CustomerType.TIPO_RESIDENCIAL_SOCIAL)
+            {
+                if (currentWaterConsumption > 0 && currentWaterConsumption < 6)
+                {
+                    this.tariffWater.push(10.08;
+                }else if(currentWaterConsumption > 6 && currentWaterConsumption < 10) {
+                    this.tariffWater.push(2.241 ;
                 }
             }
             else

@@ -22,6 +22,7 @@ namespace TrabFinalPOO.Source
 
         public double GetAdditionalValue() { return additionalValue;}
         public double GetTariffEnergy() {  return tariffEnergy;}
+        public void SetAdditionalValue(double additionalValue) { this.additionalValue = additionalValue; }
         public void SetTariffEnergy(string typeCustomer) {
             double valueTariffEnergy = 0;
         
