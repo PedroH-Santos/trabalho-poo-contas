@@ -18,6 +18,8 @@ namespace TrabFinalPOO.Source
             Customer customer = immobile.getCustomer();
             this.SetTariffEnergy(customer.GetTypeCustomer());
             this.SetValueWithOutTax();
+            this.SetTax(customer.GetTypeCustomer());
+            this.SetTotalValue();
         }
 
         public double GetAdditionalValue() { return additionalValue;}
@@ -36,7 +38,7 @@ namespace TrabFinalPOO.Source
             }
             this.tariffEnergy = valueTariffEnergy; 
         }
-        public override void SetTotalValue(double value)
+        public override void SetTotalValue()
         {
             if (this.GetTax() == 0)
             {

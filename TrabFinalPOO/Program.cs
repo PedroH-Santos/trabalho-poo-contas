@@ -17,6 +17,9 @@ namespace TrabFinalPOO
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
+            TrabFinalPOO.Source.File.read("C:\\Users\\major\\source\\repos\\TrabFinalPOO\\TrabFinalPOO\\BD\\endereco.txt");
+
         }
     }
 }

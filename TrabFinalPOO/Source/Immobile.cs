@@ -26,6 +26,7 @@ namespace TrabFinalPOO.Source
             this.length = length;
             this.value = value;
             this.customer = customer;
+            this.SetArea();
         }
 
         public Address getAddress() { return this.address; }
@@ -39,13 +40,13 @@ namespace TrabFinalPOO.Source
 
         public void SetAddress(Address address) { this.address = address;}
         public void SetName(string name) {  this.name = name; }
-        public void SetArea(double area) { 
+        public void SetArea() { 
             if(this.length == 0 || this.width== 0 || this.height == 0)
             {
                 throw new Exception("Para calcular a área é preciso determinar os valores da altura, largura e comprimento do imóvel");
             }
             
-            this.area = area; 
+            this.area = this.length * this.width * this.height; 
         }
         public void SetWidth(double width) {  this.width = width; }
         public void SetHeight(double height) {  this.height = height; }

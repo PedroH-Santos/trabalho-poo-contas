@@ -11,17 +11,18 @@ namespace TrabFinalPOO.Source
 
         private double lastMonthReader;
         private double currentMonthReader;
+        private DateTime effectiveDate;
+        private Immobile immobile;
         protected double consumption;
         protected double totalValue;
         protected double valueWithOutTax;
         protected double tax;
-        private DateTime effectiveDate;
-        private Immobile immobile;
         public Account(double lastMonthReader, double  currentMonthReader, DateTime effectiveDate, Immobile immobile) { 
             this.lastMonthReader = lastMonthReader;
             this.currentMonthReader = currentMonthReader;
             this.effectiveDate = effectiveDate;
             this.immobile = immobile;
+            this.SetConsumption();
         }
 
         public double GetLastMonthReader() {  return lastMonthReader; }
@@ -33,10 +34,9 @@ namespace TrabFinalPOO.Source
         public DateTime GetEffectiveDate() {  return effectiveDate; }
 
         public Immobile GetImmobile() { return immobile; }
-
         public void SetLastMonthReader(double value) { this.lastMonthReader = value; }
         public void SetCurrentMonthReader(double value) {  this.currentMonthReader= value; }
-        public void SetConsumption(double value) {  
+        public void SetConsumption() {  
             if(this.lastMonthReader == 0 || this.currentMonthReader == 0)
             {
                 throw new Exception("É preciso configurar quais foram as leituras do mês anterior e atual.");
@@ -44,10 +44,12 @@ namespace TrabFinalPOO.Source
             consumption = this.currentMonthReader - this.lastMonthReader; 
         
         }
-        public virtual void SetTotalValue(double value) {  totalValue = value; }
-        public virtual void SetValueWithOutTax() { }
-        public virtual void SetTax(double value) {  tax = value; }
         public void SetEffectiveDate(DateTime value) {  effectiveDate = value; }
         public void SetImmobile(Immobile value) { immobile = value; }
+        public virtual void SetTax(double value) { tax = value; }
+
+        public abstract void SetTotalValue();
+        public abstract void SetValueWithOutTax();
+
     }
 }
