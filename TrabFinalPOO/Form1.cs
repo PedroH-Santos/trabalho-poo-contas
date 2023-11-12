@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabFinalPOO.Source;
 
 namespace TrabFinalPOO
 {
@@ -24,10 +25,36 @@ namespace TrabFinalPOO
 
         private void P_Click(object sender, EventArgs e)
         {
-
+            this.Hide();
+            CretateCustomer cs = new CretateCustomer();
+            cs.Show();
         }
 
         private void ButtonLogin_Click(object sender, EventArgs e)
+        {
+            string email = EmailTextBox.Text;
+            string password = PasswordTextBox.Text;
+
+            if(email == "" || password == "")
+            {
+                MessageBox.Show("É necessário informar o e-mail e a senha para encontrar o cliente");
+                return;
+            }
+            
+
+            try
+            {
+                Customer custumer = File.SearchCustomerFileByEmail(email);
+                // Abrir a página de detalhes
+            }catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return;
+            }
+
+        }
+
+        private void EmailTextBox_TextChanged(object sender, EventArgs e)
         {
 
         }

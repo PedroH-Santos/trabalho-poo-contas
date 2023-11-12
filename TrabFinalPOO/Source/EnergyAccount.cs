@@ -12,13 +12,12 @@ namespace TrabFinalPOO.Source
         private double tariffEnergy;
 
 
-        public EnergyAccount(double lastMonthReader, double currentMonthReader, DateTime effectiveDate, Immobile immobile) : base(lastMonthReader, currentMonthReader, effectiveDate, immobile)
+        public EnergyAccount(int id, double lastMonthReader, double currentMonthReader, DateTime effectiveDate, string typeCustomer) : base(id,lastMonthReader, currentMonthReader, effectiveDate)
         {
             this.additionalValue = 13.25;
-            Customer customer = immobile.getCustomer();
-            this.SetTariffEnergy(customer.GetTypeCustomer());
+            this.SetTariffEnergy(typeCustomer);
             this.SetValueWithOutTax();
-            this.SetTax(customer.GetTypeCustomer());
+            this.SetTax(typeCustomer);
             this.SetTotalValue();
         }
 
@@ -40,10 +39,7 @@ namespace TrabFinalPOO.Source
         }
         public override void SetTotalValue()
         {
-            if (this.GetTax() == 0)
-            {
-                throw new Exception("É preciso determinar a taxa para calcular o valor total com a mesma");
-            }else if(this.GetValueWithOutTax() == 0)
+            if(this.GetValueWithOutTax() == 0)
             {
                 throw new Exception("É preciso calcular o valor sem a taxa fixa");
             }

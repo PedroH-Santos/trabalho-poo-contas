@@ -38,7 +38,7 @@
             // 
             // ButtonCreateCustomer
             // 
-            this.ButtonCreateCustomer.Location = new System.Drawing.Point(386, 306);
+            this.ButtonCreateCustomer.Location = new System.Drawing.Point(386, 229);
             this.ButtonCreateCustomer.Name = "ButtonCreateCustomer";
             this.ButtonCreateCustomer.Size = new System.Drawing.Size(75, 23);
             this.ButtonCreateCustomer.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // ButtonLogin
             // 
-            this.ButtonLogin.Location = new System.Drawing.Point(386, 266);
+            this.ButtonLogin.Location = new System.Drawing.Point(386, 190);
             this.ButtonLogin.Name = "ButtonLogin";
             this.ButtonLogin.Size = new System.Drawing.Size(75, 23);
             this.ButtonLogin.TabIndex = 1;
@@ -58,15 +58,16 @@
             // 
             // EmailTextBox
             // 
-            this.EmailTextBox.Location = new System.Drawing.Point(386, 145);
+            this.EmailTextBox.Location = new System.Drawing.Point(386, 94);
             this.EmailTextBox.Name = "EmailTextBox";
             this.EmailTextBox.Size = new System.Drawing.Size(100, 20);
             this.EmailTextBox.TabIndex = 2;
+            this.EmailTextBox.TextChanged += new System.EventHandler(this.EmailTextBox_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(329, 148);
+            this.label1.Location = new System.Drawing.Point(348, 97);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(32, 13);
             this.label1.TabIndex = 3;
@@ -75,7 +76,7 @@
             // PasswordLabel
             // 
             this.PasswordLabel.AutoSize = true;
-            this.PasswordLabel.Location = new System.Drawing.Point(332, 202);
+            this.PasswordLabel.Location = new System.Drawing.Point(342, 145);
             this.PasswordLabel.Name = "PasswordLabel";
             this.PasswordLabel.Size = new System.Drawing.Size(38, 13);
             this.PasswordLabel.TabIndex = 4;
@@ -83,7 +84,7 @@
             // 
             // PasswordTextBox
             // 
-            this.PasswordTextBox.Location = new System.Drawing.Point(386, 202);
+            this.PasswordTextBox.Location = new System.Drawing.Point(386, 142);
             this.PasswordTextBox.Name = "PasswordTextBox";
             this.PasswordTextBox.Size = new System.Drawing.Size(100, 20);
             this.PasswordTextBox.TabIndex = 5;

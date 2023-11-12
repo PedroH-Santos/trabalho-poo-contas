@@ -17,7 +17,7 @@ namespace TrabFinalPOO.Source
         public Customer(string name, string cpf, string email, string phone, string password, string typeCustomer) {
 
             try {
-                this.ValidateTypeCustomer(name);
+                this.ValidateTypeCustomer(typeCustomer);
                 this.name = name;
                 this.cpf = cpf;
                 this.email = email;

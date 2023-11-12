@@ -27,12 +27,11 @@ namespace TrabFinalPOO.Source
 
 
         private List<TableTariff> tariffsApplied;
-        public WaterAccount(double lastMonthReader, double currentMonthReader, DateTime effectiveDate, Immobile immobile) : base(lastMonthReader, currentMonthReader,  effectiveDate, immobile)
+        public WaterAccount(int id,double lastMonthReader, double currentMonthReader, DateTime effectiveDate, string typeCustomer) : base(id,lastMonthReader, currentMonthReader,  effectiveDate)
         {
-            Customer customer = immobile.getCustomer();
             this.tariffsApplied = new List<TableTariff>();
             base.SetTax(3);
-            this.SetTariffApllied(customer.GetTypeCustomer());
+            this.SetTariffApllied(typeCustomer);
             this.SetValueWithOutTax();
             this.SetTotalValue();
 

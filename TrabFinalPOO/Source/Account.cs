@@ -9,19 +9,19 @@ namespace TrabFinalPOO.Source
     public abstract class Account
     {
 
+        public double id;
         private double lastMonthReader;
         private double currentMonthReader;
         private DateTime effectiveDate;
-        private Immobile immobile;
         protected double consumption;
         protected double totalValue;
         protected double valueWithOutTax;
         protected double tax;
-        public Account(double lastMonthReader, double  currentMonthReader, DateTime effectiveDate, Immobile immobile) { 
+        public Account(double id,double lastMonthReader, double  currentMonthReader, DateTime effectiveDate) {
+            this.id = id;
             this.lastMonthReader = lastMonthReader;
             this.currentMonthReader = currentMonthReader;
             this.effectiveDate = effectiveDate;
-            this.immobile = immobile;
             this.SetConsumption();
         }
 
@@ -33,7 +33,6 @@ namespace TrabFinalPOO.Source
         public  double GetTax() { return tax; }  
         public DateTime GetEffectiveDate() {  return effectiveDate; }
 
-        public Immobile GetImmobile() { return immobile; }
         public void SetLastMonthReader(double value) { this.lastMonthReader = value; }
         public void SetCurrentMonthReader(double value) {  this.currentMonthReader= value; }
         public void SetConsumption() {  
@@ -45,7 +44,6 @@ namespace TrabFinalPOO.Source
         
         }
         public void SetEffectiveDate(DateTime value) {  effectiveDate = value; }
-        public void SetImmobile(Immobile value) { immobile = value; }
         public virtual void SetTax(double value) { tax = value; }
 
         public abstract void SetTotalValue();

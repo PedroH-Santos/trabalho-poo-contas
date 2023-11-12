@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabFinalPOO.Source;
 
 namespace TrabFinalPOO
 {
@@ -18,7 +19,6 @@ namespace TrabFinalPOO
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
 
-            TrabFinalPOO.Source.File.read("C:\\Users\\major\\source\\repos\\TrabFinalPOO\\TrabFinalPOO\\BD\\endereco.txt");
 
         }
     }

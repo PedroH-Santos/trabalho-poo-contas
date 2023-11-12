@@ -8,6 +8,7 @@ namespace TrabFinalPOO.Source
 {
     public class Immobile
     {
+        private int id;
         private Address address;
         private string name;
         private double area;
@@ -16,9 +17,11 @@ namespace TrabFinalPOO.Source
         private double length;
         private double value;
         private Customer customer;
+        private List<Account> accounts;
        
-        public Immobile(Address address, string name, double width, double height, double length, double value, Customer customer)
+        public Immobile(int id,Address address, string name, double width, double height, double length, double value, Customer customer, List<Account> accounts)
         {
+            this.id = id;
             this.address = address;
             this.name = name;
             this.width = width;
@@ -26,6 +29,7 @@ namespace TrabFinalPOO.Source
             this.length = length;
             this.value = value;
             this.customer = customer;
+            this.accounts = accounts;
             this.SetArea();
         }
 
