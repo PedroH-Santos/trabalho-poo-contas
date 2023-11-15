@@ -367,6 +367,31 @@ namespace TrabFinalPOO.Source
             }
         }
 
+        public static int WriteAccountFile(string type, double currentMonthReader, double lastMonthReader, string effectiveDate, int idImmobile)
+        {
+            try
+            {
+                int id = File.getLines(File.pathFileAccount) + 1;
+                using (StreamWriter writer = new StreamWriter(File.pathFileAccount, true))
+                {
+                    string line = id + "|" + (type == "Agua" ? 1 : 0) + "|" + currentMonthReader + "|" + lastMonthReader + "|" + effectiveDate + "|" + idImmobile;
+                    writer.WriteLine(line);
+                }
+                return id;
+
+
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new FileNotFoundException(ex.Message);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         private static int getLines(string file)
         {
             var lineCount = 0;

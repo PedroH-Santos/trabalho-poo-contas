@@ -133,6 +133,7 @@
             // 
             // typeCollection
             // 
+            this.typeCollection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.typeCollection.FormattingEnabled = true;
             this.typeCollection.Items.AddRange(new object[] {
             "Residencial",

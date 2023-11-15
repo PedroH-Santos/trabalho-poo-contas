@@ -8,6 +8,7 @@ using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TrabFinalPOO.BD;
 using TrabFinalPOO.Source;
 
 namespace TrabFinalPOO
@@ -70,6 +71,52 @@ namespace TrabFinalPOO
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void PesquisarDatasButton_Click(object sender, EventArgs e)
+        {
+            DateTime startDate = DateTimeStart.Value;
+            DateTime endDate = DateTimeEnd.Value;
+            double variationConsumption = 0;
+            double variationValue = 0;
+            Account firstDate = null;
+            Account secondDate = null;
+            foreach (Account account in this.immobile.getAccounts() )
+            {
+                if (account.GetEffectiveDate().Month == startDate.Month)
+                {
+                    firstDate = account;
+                }
+                if(account.GetEffectiveDate().Month == endDate.Month)
+                {
+                    secondDate = account;
+
+                }
+            }
+            if(firstDate == null || secondDate == null)
+            {            
+               MessageBox.Show("Não foi encontrado nenhuma conta no mês escolhido.");
+               return;
+
+            }
+            variationConsumption = firstDate.GetConsumption() - secondDate.GetConsumption();
+            variationValue = firstDate.GetTotalValue() - secondDate.GetTotalValue();
+            label10.Text = "Valor variado entre os meses escolhidos: " + ((variationValue < 0) ? variationValue * -1 : variationValue);
+            label11.Text = "Consumo variado entre os meses escolhidos: : " + ((variationConsumption < 0) ? variationConsumption * -1 : variationConsumption);
+
+
+        }
+
+        private void DateTimeStart_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void CriarContaButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            CreateAccount account = new CreateAccount(this.customer,this.immobile);
+            account.Show();
         }
     }
 }

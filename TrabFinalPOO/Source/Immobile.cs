@@ -40,6 +40,8 @@ namespace TrabFinalPOO.Source
         public double getHeight() { return this.height;}
         public double getLength() { return this.length;}
         public double getValue() { return this.value; }
+
+        public int getId() { return this.id; }
         public Customer getCustomer() { return this.customer;}
 
         public List<Account> getAccounts() {  return this.accounts; }

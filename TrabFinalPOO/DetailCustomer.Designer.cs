@@ -107,6 +107,7 @@
             this.DateTimeStart.Name = "DateTimeStart";
             this.DateTimeStart.Size = new System.Drawing.Size(179, 20);
             this.DateTimeStart.TabIndex = 7;
+            this.DateTimeStart.ValueChanged += new System.EventHandler(this.DateTimeStart_ValueChanged);
             // 
             // DateTimeEnd
             // 
@@ -120,18 +121,18 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(42, 239);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 13);
+            this.label8.Size = new System.Drawing.Size(67, 13);
             this.label8.TabIndex = 9;
-            this.label8.Text = "Mês de início";
+            this.label8.Text = "Primeiro Mês";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(368, 245);
+            this.label9.Location = new System.Drawing.Point(361, 245);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(58, 13);
+            this.label9.Size = new System.Drawing.Size(73, 13);
             this.label9.TabIndex = 10;
-            this.label9.Text = "Mês de fim";
+            this.label9.Text = "Segundo Mês";
             // 
             // label10
             // 
@@ -159,6 +160,7 @@
             this.PesquisarDatasButton.TabIndex = 13;
             this.PesquisarDatasButton.Text = "Buscar";
             this.PesquisarDatasButton.UseVisualStyleBackColor = true;
+            this.PesquisarDatasButton.Click += new System.EventHandler(this.PesquisarDatasButton_Click);
             // 
             // CriarContaButton
             // 
@@ -168,6 +170,7 @@
             this.CriarContaButton.TabIndex = 14;
             this.CriarContaButton.Text = "Criar nova conta";
             this.CriarContaButton.UseVisualStyleBackColor = true;
+            this.CriarContaButton.Click += new System.EventHandler(this.CriarContaButton_Click);
             // 
             // label5
             // 
