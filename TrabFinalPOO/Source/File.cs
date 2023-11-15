@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace TrabFinalPOO.Source
 {
@@ -86,7 +88,7 @@ namespace TrabFinalPOO.Source
                         string phone = traitLine[4];
                         string password = traitLine[5];
                         string type = traitLine[6];
-                        Customer customer = new Customer(name, cpf, email, phone, password, type) ;
+                        Customer customer = new Customer(id,name, cpf, email, phone, password, type) ;
                         reader.Close();
                         return customer;
                     }
@@ -105,7 +107,7 @@ namespace TrabFinalPOO.Source
                 throw new Exception(ex.Message);
             }
         }
-        public static Customer SearchCustomerFileByEmail(string emailFind)
+        public static Customer SearchCustomerFileByEmailAndPassword(string emailFind, string passwordFind)
         {
             try
             {
@@ -121,12 +123,12 @@ namespace TrabFinalPOO.Source
                     string name = traitLine[1];
                     string cpf = traitLine[2];
                     string email = traitLine[3];
-                    if (email == emailFind)
+                    string phone = traitLine[4];
+                    string password = traitLine[5];
+                    string type = traitLine[6];
+                    if (email == emailFind.Trim() && password == passwordFind.Trim())
                     {
-                        string phone = traitLine[4];
-                        string password = traitLine[5];
-                        string type = traitLine[6];
-                        Customer customer = new Customer(name, cpf, email, phone, password, type);
+                        Customer customer = new Customer(id,name, cpf, email, phone, password, type);
                         reader.Close();
                         return customer;
                     }
@@ -145,6 +147,59 @@ namespace TrabFinalPOO.Source
                 throw new Exception(ex.Message);
             }
         }
+
+        public static Immobile SearchImmobileByIdCustomer(int findIdCustomer) 
+        {
+            try
+            {
+
+                StreamReader reader = new StreamReader(File.pathFileImmobile);
+                string line = "";
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] traitLine = line.Split('|');
+
+                    int id = Convert.ToInt32(traitLine[0]);
+                    int idAddress = Convert.ToInt32(traitLine[1]);
+                    Address address = File.SearchAddressFileById(idAddress);
+                    string name = traitLine[2];
+                    double width = Convert.ToDouble(traitLine[3]);
+                    double height = Convert.ToDouble(traitLine[4]);
+                    double length = Convert.ToDouble(traitLine[5]);
+                    double valueImmobile = Convert.ToDouble(traitLine[6]);
+                    int idCustomer = Convert.ToInt32(traitLine[7]);
+                    Customer customer = File.SearchCustomerFileById(idCustomer);
+                    string[] listIdsAccount = traitLine[8].Split(';');
+                    List<Account> accounts = new List<Account>();
+                    if (listIdsAccount != null)
+                    {
+                        foreach (string idAccount in listIdsAccount)
+                        {
+                            accounts.Add(File.SearchAccountFileById(Convert.ToInt32(idAccount), customer.GetTypeCustomer()));
+                        }
+                    }
+                    if (idCustomer == findIdCustomer)
+                    {
+                        Immobile immobile = new Immobile(id, address, name, width, height, length, valueImmobile, customer, accounts);
+
+                        return immobile;
+                    }
+                }
+                reader.Close();
+
+                throw new Exception("Imóvel Não foi encontrado");
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new FileNotFoundException(ex.Message);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public static Address SearchAddressFileById(int idAddress)
         {
@@ -210,13 +265,16 @@ namespace TrabFinalPOO.Source
                         int idCustomer = Convert.ToInt32(traitLine[7]);
                         Customer customer = File.SearchCustomerFileById( idCustomer);
                         string[] listIdsAccount = traitLine[8].Split(';');
-                    List<Account> accounts = new List<Account>();    
-                    foreach (string idAccount in listIdsAccount)
-                    {
-                        accounts.Add(File.SearchAccountFileById(Convert.ToInt32(idAccount), customer.GetTypeCustomer()));
-                    }   
-                    Immobile immobile = new Immobile(id,address,name,width,height,length,valueImmobile,customer,accounts);
-                    value.Add(immobile);
+                        List<Account> accounts = new List<Account>();
+                        if (listIdsAccount != null)
+                        {
+                            foreach (string idAccount in listIdsAccount)
+                            {
+                                accounts.Add(File.SearchAccountFileById(Convert.ToInt32(idAccount), customer.GetTypeCustomer()));
+                            }
+                        }
+                        Immobile immobile = new Immobile(id,address,name,width,height,length,valueImmobile,customer,accounts);
+                        value.Add(immobile);
                     
                 }
                 reader.Close();
@@ -235,7 +293,7 @@ namespace TrabFinalPOO.Source
         }
 
 
-        public static void WriteCustomerFile(string name, string cpf, string email, string phone, string password, string typeCustomer)
+        public static int WriteCustomerFile(string name, string cpf, string email, string phone, string password, string typeCustomer)
         {
             try
             {
@@ -245,6 +303,56 @@ namespace TrabFinalPOO.Source
                     string line = id + "|" + name + "|" + cpf + "|" + email + "|" + phone + "|" + password + "|" + typeCustomer;
                     writer.WriteLine(line);
                 }
+                return id;
+
+
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new FileNotFoundException(ex.Message);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static int WriteImmobileFile(string name, double width, double height, double length, double value, int idCustomer, int idAddress )
+        {
+            try
+            {
+                int id = File.getLines(File.pathFileImmobile) + 1;
+                using (StreamWriter writer = new StreamWriter(File.pathFileImmobile, true))
+                {
+                    string line = id + "|" + name + "|" + idAddress + "|" + width + "|" + height + "|" + length + "|" + value + "|" + idCustomer + "|" + null;
+                    writer.WriteLine(line);
+                }
+                return id;
+
+
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new FileNotFoundException(ex.Message);
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static int WriteAddressFile(string street, string zipcode, string neighborhood, string city, string country)
+        {
+            try
+            {
+                int id = File.getLines(File.pathFileAddress) + 1;
+                using (StreamWriter writer = new StreamWriter(File.pathFileAddress, true))
+                {
+                    string line = id + "|" + street + "|" + zipcode + "|" + neighborhood + "|" + city + "|" + country;
+                    writer.WriteLine(line);
+                }
+                return id;
 
 
             }

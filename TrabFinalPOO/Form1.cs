@@ -44,9 +44,13 @@ namespace TrabFinalPOO
 
             try
             {
-                Customer custumer = File.SearchCustomerFileByEmail(email);
+                Customer customer = File.SearchCustomerFileByEmailAndPassword(email,password);
+                this.Hide();
+                DetailCustomer cs = new DetailCustomer(customer);
+                cs.Show();
                 // Abrir a página de detalhes
-            }catch(Exception ex)
+            }
+            catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 return;

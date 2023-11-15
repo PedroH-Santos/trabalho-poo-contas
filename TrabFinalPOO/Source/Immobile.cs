@@ -42,6 +42,7 @@ namespace TrabFinalPOO.Source
         public double getValue() { return this.value; }
         public Customer getCustomer() { return this.customer;}
 
+        public List<Account> getAccounts() {  return this.accounts; }
         public void SetAddress(Address address) { this.address = address;}
         public void SetName(string name) {  this.name = name; }
         public void SetArea() { 

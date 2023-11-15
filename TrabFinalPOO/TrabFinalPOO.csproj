@@ -52,6 +52,12 @@
     <Compile Include="CreateCustomer.Designer.cs">
       <DependentUpon>CreateCustomer.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetailCustomer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetailCustomer.Designer.cs">
+      <DependentUpon>DetailCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +76,9 @@
     <Compile Include="Source\WaterAccount.cs" />
     <EmbeddedResource Include="CreateCustomer.resx">
       <DependentUpon>CreateCustomer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetailCustomer.resx">
+      <DependentUpon>DetailCustomer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>

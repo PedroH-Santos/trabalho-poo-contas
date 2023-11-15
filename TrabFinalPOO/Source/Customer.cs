@@ -8,15 +8,17 @@ namespace TrabFinalPOO.Source
 {
     public class Customer
     {
+        private int id;
         private string name;
         private string cpf;
         private string email;
         private string phone;
         private string password;
         private string typeCustomer;
-        public Customer(string name, string cpf, string email, string phone, string password, string typeCustomer) {
+        public Customer(int id, string name, string cpf, string email, string phone, string password, string typeCustomer) {
 
             try {
+                this.id = id;
                 this.ValidateTypeCustomer(typeCustomer);
                 this.name = name;
                 this.cpf = cpf;
@@ -30,7 +32,7 @@ namespace TrabFinalPOO.Source
             }
         }
 
-        
+        public int GetId() { return this.id;}
         public string GetName() { return this.name; }
         public string GetCpf() { return this.cpf; }
         public string GetEmail() { return this.email; }
