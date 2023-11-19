@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using TrabFinalPOO.Source;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
@@ -30,17 +31,59 @@ namespace TrabFinalPOO
 
             try
             {
-                int idCustomer = insertCustomer();
+                //Customer
+                string name = nameTextBox.Text;
+                string email = EmailTextBox.Text;
+                string cpf = cpfTextBox.Text;
+                string password = senhaTextBox.Text;
+                string type = typeCollection.Text;
+                string phone = phoneTextBox.Text;
+
+                if (name == "" || email == "" || cpf == "" || password == "" || type == "" || phone == "")
+                {
+                    MessageBox.Show("É necessário informar todas as informações");
+                    return;
+                }
+
+                //Immobile
+                string nameImmobile = NameImobTextBox.Text;
+                double width = Convert.ToDouble(widthTextBox.Text);
+                double heigth = Convert.ToDouble(HeightTextBox.Text);
+                double length = Convert.ToDouble(LenghtTextBox.Text);
+                double value = Convert.ToDouble(ValueTextBox.Text);
+
+                if (nameImmobile == "" || width == 0 || heigth == 0 || length == 0 || value == 0)
+                {
+                    MessageBox.Show("É necessário informar todas as informações do imóvel");
+                    return;
+                }
+
+                
+                //Address
+                string street = StreetTextBox.Text;
+                string zipCode = ZipCodeTextBox.Text;
+                string neighborhood = NeighborhoodTextBox.Text;
+                string city = CityTextBox.Text;
+                string country = ContryTextBox.Text;
+
+                if (street == "" || zipCode == "" || neighborhood == "" || city == "" || country == "")
+                {
+                    MessageBox.Show("É necessário informar todas as informações do endereço");
+                    return;
+                }
+
+
+                int idCustomer = insertCustomer(name,cpf,email,phone,password,type);
                 if(idCustomer == -1)
                 {
                     return;
                 }
-                int idAddress = insertAddress();
+                int idAddress = insertAddress(street,zipCode,neighborhood,city,country);
                 if (idAddress == -1)
                 {
                     return;
                 }
-                int idImmobile = insertImmobile(idCustomer, idAddress);
+                int idImmobile = insertImmobile(nameImmobile, width, heigth, length, value , idCustomer, idAddress);
                 if (idImmobile == -1)
                 {
                     return;
@@ -53,31 +96,23 @@ namespace TrabFinalPOO
             }
             catch (FormatException ex)
             {
-    
-            } 
+                MessageBox.Show("Houve um erro ao inserir tipos de valores incorretos!");
 
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ERROR: " + ex.Message);
+            }
         }
 
 
-        private int insertCustomer()
+        private int insertCustomer(string name, string cpf, string email, string phone, string password, string type)
         {
-            string name = nameTextBox.Text;
-            string email = EmailTextBox.Text;
-            string cpf = cpfTextBox.Text;
-            string password = senhaTextBox.Text;
-            string type = typeCollection.Text;
-            string phone = phoneTextBox.Text;
 
-            if (name == "" || email == "" || cpf == "" || password == "" || type == "" || phone == "")
-            {
-                MessageBox.Show("É necessário informar todas as informações");
-                return -1;
-            }
 
             try
             {
-                int id = File.WriteCustomerFile(name, cpf, email, phone, password, type);
+                int id = FileBD.WriteCustomerFile(name, cpf, email, phone, password, type);
                 return id;
             }
             catch (Exception ex)
@@ -87,23 +122,11 @@ namespace TrabFinalPOO
             }
         }
 
-        private int insertImmobile(int idCustomer, int idAddress)
+        private int insertImmobile(string nameImmobile, double width, double heigth, double length, double value,int idCustomer, int idAddress)
         {
-            string name = NameImobTextBox.Text;
-            double width = Convert.ToDouble(widthTextBox.Text);
-            double heigth = Convert.ToDouble(HeightTextBox.Text);
-            double length = Convert.ToDouble(LenghtTextBox.Text);
-            double value = Convert.ToDouble(ValueTextBox.Text);
-
-            if (name == "" || width == 0 || heigth == 0 || length == 0 || value == 0 )
-            {
-                MessageBox.Show("É necessário informar todas as informações do imóvel");
-                return -1;
-            }
-
             try
             {
-                int id = File.WriteImmobileFile(name,width,heigth,length,value,idCustomer,idAddress);
+                int id = FileBD.WriteImmobileFile(nameImmobile, width,heigth,length,value,idCustomer,idAddress);
                 return id ;
             }
             catch (Exception ex)
@@ -115,23 +138,11 @@ namespace TrabFinalPOO
         }
 
 
-        private int insertAddress()
+        private int insertAddress(string street, string zipCode, string neighborhood, string city, string country)
         {
-            string street = StreetTextBox.Text;
-            string zipCode = ZipCodeTextBox.Text;
-            string neighborhood = NeighborhoodTextBox.Text;
-            string city = CityTextBox.Text;
-            string country = ContryTextBox.Text;
-
-            if (street == "" || zipCode == "" || neighborhood == "" || city == "" || country == "")
-            {
-                MessageBox.Show("É necessário informar todas as informações do endereço");
-                return -1;
-            }
-
             try
             {
-                int id = File.WriteAddressFile(street, zipCode, neighborhood, city, country);
+                int id = FileBD.WriteAddressFile(street, zipCode, neighborhood, city, country);
                 return id;
             }
             catch (Exception ex)

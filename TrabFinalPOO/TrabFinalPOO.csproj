@@ -77,7 +77,7 @@
     <Compile Include="Source\Customer.cs" />
     <Compile Include="Source\Address.cs" />
     <Compile Include="Source\EnergyAccount.cs" />
-    <Compile Include="Source\File.cs" />
+    <Compile Include="Source\FileBD.cs" />
     <Compile Include="Source\Immobile.cs" />
     <Compile Include="Source\WaterAccount.cs" />
     <EmbeddedResource Include="CreateAccount.resx">

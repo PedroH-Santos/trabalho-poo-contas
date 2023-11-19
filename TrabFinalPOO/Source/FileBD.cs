@@ -9,7 +9,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace TrabFinalPOO.Source
 {
-    public static class File
+    public static class FileBD
     {
 
         static string pathFileCustomer = "C:\\Users\\major\\source\\repos\\TrabFinalPOO\\TrabFinalPOO\\BD\\cliente.txt";
@@ -23,7 +23,7 @@ namespace TrabFinalPOO.Source
             {
 
 
-                StreamReader reader = new StreamReader(File.pathFileAccount);
+                StreamReader reader = new StreamReader(FileBD.pathFileAccount);
                 string line = "";
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -39,11 +39,13 @@ namespace TrabFinalPOO.Source
                         if (type == 1) //Water
                         {
                             WaterAccount account = new WaterAccount(id,lastMonthReader, currentMonthReader, effectiveDate, typeCustomer);
+                            reader.Close();
                             return account;
                         }
                         else if (type == 2) //Energy
                         {
                             EnergyAccount account = new EnergyAccount(id,lastMonthReader, currentMonthReader, effectiveDate, typeCustomer);
+                            reader.Close();
                             return account;
                         }
                     }
@@ -71,7 +73,7 @@ namespace TrabFinalPOO.Source
             {
 
 
-                StreamReader reader = new StreamReader(File.pathFileCustomer);
+                StreamReader reader = new StreamReader(FileBD.pathFileCustomer);
                 string line = "";
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -113,7 +115,7 @@ namespace TrabFinalPOO.Source
             {
 
 
-                StreamReader reader = new StreamReader(File.pathFileCustomer);
+                StreamReader reader = new StreamReader(FileBD.pathFileCustomer);
                 string line = "";
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -153,7 +155,7 @@ namespace TrabFinalPOO.Source
             try
             {
 
-                StreamReader reader = new StreamReader(File.pathFileImmobile);
+                StreamReader reader = new StreamReader(FileBD.pathFileImmobile);
                 string line = "";
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -161,27 +163,27 @@ namespace TrabFinalPOO.Source
 
                     int id = Convert.ToInt32(traitLine[0]);
                     int idAddress = Convert.ToInt32(traitLine[1]);
-                    Address address = File.SearchAddressFileById(idAddress);
+                    Address address = FileBD.SearchAddressFileById(idAddress);
                     string name = traitLine[2];
                     double width = Convert.ToDouble(traitLine[3]);
                     double height = Convert.ToDouble(traitLine[4]);
                     double length = Convert.ToDouble(traitLine[5]);
                     double valueImmobile = Convert.ToDouble(traitLine[6]);
                     int idCustomer = Convert.ToInt32(traitLine[7]);
-                    Customer customer = File.SearchCustomerFileById(idCustomer);
+                    Customer customer = FileBD.SearchCustomerFileById(idCustomer);
                     string[] listIdsAccount = traitLine[8].Split(';');
                     List<Account> accounts = new List<Account>();
-                    if (listIdsAccount != null)
+                    if (listIdsAccount != null && listIdsAccount[0] != "")
                     {
                         foreach (string idAccount in listIdsAccount)
                         {
-                            accounts.Add(File.SearchAccountFileById(Convert.ToInt32(idAccount), customer.GetTypeCustomer()));
+                            accounts.Add(FileBD.SearchAccountFileById(Convert.ToInt32(idAccount), customer.GetTypeCustomer()));
                         }
                     }
                     if (idCustomer == findIdCustomer)
                     {
                         Immobile immobile = new Immobile(id, address, name, width, height, length, valueImmobile, customer, accounts);
-
+                        reader.Close();
                         return immobile;
                     }
                 }
@@ -207,7 +209,7 @@ namespace TrabFinalPOO.Source
             {
 
 
-                StreamReader reader = new StreamReader(File.pathFileAddress);
+                StreamReader reader = new StreamReader(FileBD.pathFileAddress);
                 string line = "";
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -248,7 +250,7 @@ namespace TrabFinalPOO.Source
             {
 
                 List<Immobile> value = new List<Immobile> ();
-                StreamReader reader = new StreamReader(File.pathFileImmobile);
+                StreamReader reader = new StreamReader(FileBD.pathFileImmobile);
                 string line = "";
                 while ((line = reader.ReadLine()) != null)
                 {
@@ -256,21 +258,21 @@ namespace TrabFinalPOO.Source
 
                         int id = Convert.ToInt32(traitLine[0]);
                         int idAddress = Convert.ToInt32(traitLine[1]);
-                        Address address = File.SearchAddressFileById(idAddress);
+                        Address address = FileBD.SearchAddressFileById(idAddress);
                         string name = traitLine[2];
                         double width = Convert.ToDouble(traitLine[3]);
                         double height = Convert.ToDouble(traitLine[4]);
                         double length = Convert.ToDouble(traitLine[5]);
                         double valueImmobile = Convert.ToDouble(traitLine[6]);
                         int idCustomer = Convert.ToInt32(traitLine[7]);
-                        Customer customer = File.SearchCustomerFileById( idCustomer);
+                        Customer customer = FileBD.SearchCustomerFileById( idCustomer);
                         string[] listIdsAccount = traitLine[8].Split(';');
                         List<Account> accounts = new List<Account>();
-                        if (listIdsAccount != null)
+                        if (listIdsAccount != null && listIdsAccount[0] != "")
                         {
                             foreach (string idAccount in listIdsAccount)
                             {
-                                accounts.Add(File.SearchAccountFileById(Convert.ToInt32(idAccount), customer.GetTypeCustomer()));
+                                accounts.Add(FileBD.SearchAccountFileById(Convert.ToInt32(idAccount), customer.GetTypeCustomer()));
                             }
                         }
                         Immobile immobile = new Immobile(id,address,name,width,height,length,valueImmobile,customer,accounts);
@@ -297,11 +299,12 @@ namespace TrabFinalPOO.Source
         {
             try
             {
-                int id = File.getLines(File.pathFileCustomer) + 1;
-                using (StreamWriter writer = new StreamWriter(File.pathFileCustomer,true))
+                int id = FileBD.getLines(FileBD.pathFileCustomer) + 1;
+                using (StreamWriter writer = new StreamWriter(FileBD.pathFileCustomer,true))
                 {
                     string line = id + "|" + name + "|" + cpf + "|" + email + "|" + phone + "|" + password + "|" + typeCustomer;
                     writer.WriteLine(line);
+                    writer.Close();
                 }
                 return id;
 
@@ -321,11 +324,12 @@ namespace TrabFinalPOO.Source
         {
             try
             {
-                int id = File.getLines(File.pathFileImmobile) + 1;
-                using (StreamWriter writer = new StreamWriter(File.pathFileImmobile, true))
+                int id = FileBD.getLines(FileBD.pathFileImmobile) + 1;
+                using (StreamWriter writer = new StreamWriter(FileBD.pathFileImmobile, true))
                 {
-                    string line = id + "|" + name + "|" + idAddress + "|" + width + "|" + height + "|" + length + "|" + value + "|" + idCustomer + "|" + null;
+                    string line = id + "|" + idAddress + "|" + name + "|" + width + "|" + height + "|" + length + "|" + value + "|" + idCustomer + "|" + null;
                     writer.WriteLine(line);
+                    writer.Close();
                 }
                 return id;
 
@@ -346,11 +350,12 @@ namespace TrabFinalPOO.Source
         {
             try
             {
-                int id = File.getLines(File.pathFileAddress) + 1;
-                using (StreamWriter writer = new StreamWriter(File.pathFileAddress, true))
+                int id = FileBD.getLines(FileBD.pathFileAddress) + 1;
+                using (StreamWriter writer = new StreamWriter(FileBD.pathFileAddress, true))
                 {
                     string line = id + "|" + street + "|" + zipcode + "|" + neighborhood + "|" + city + "|" + country;
                     writer.WriteLine(line);
+                    writer.Close();
                 }
                 return id;
 
@@ -371,15 +376,18 @@ namespace TrabFinalPOO.Source
         {
             try
             {
-                int id = File.getLines(File.pathFileAccount) + 1;
-                using (StreamWriter writer = new StreamWriter(File.pathFileAccount, true))
+                int id = FileBD.getLines(FileBD.pathFileAccount) + 1;
+                using (StreamWriter writer = new StreamWriter(FileBD.pathFileAccount, true))
                 {
-                    string line = id + "|" + (type == "Agua" ? 1 : 0) + "|" + currentMonthReader + "|" + lastMonthReader + "|" + effectiveDate + "|" + idImmobile;
+                    string line = id + "|" + (type == "Agua" ? 1 : 2) + "|" + currentMonthReader + "|" + lastMonthReader + "|" + effectiveDate + "|" + idImmobile;
                     writer.WriteLine(line);
+                    writer.Close();
+
                 }
+                
                 return id;
 
-
+               
             }
             catch (FileNotFoundException ex)
             {
@@ -407,6 +415,16 @@ namespace TrabFinalPOO.Source
             reader.Close();
 
             return lineCount;
+        }
+
+        public static void updateFileImmobile(int idImmobile, int idNewAccount)
+        {
+            string[] arrLine = File.ReadAllLines(FileBD.pathFileImmobile);
+            string a = arrLine[idImmobile - 1].Split('|')[8];
+            string content = (arrLine[idImmobile - 1].Split('|')[8] != "") ? arrLine[idImmobile - 1] + ";" + idNewAccount : arrLine[idImmobile - 1] + idNewAccount.ToString();
+
+            arrLine[idImmobile - 1] = content;
+            File.WriteAllLines(FileBD.pathFileImmobile, arrLine);
         }
 
     }

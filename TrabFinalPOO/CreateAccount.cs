@@ -11,7 +11,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TrabFinalPOO.Source;
-using File = TrabFinalPOO.Source.File;
+using FileBD = TrabFinalPOO.Source.FileBD;
 
 namespace TrabFinalPOO.BD
 {
@@ -48,7 +48,8 @@ namespace TrabFinalPOO.BD
 
                 try
                 {
-                    int id = File.WriteAccountFile(type,currentMonthReader,lastMonthReader,effectiveDate.ToString(),this.immobile.getId());
+                    int id = FileBD.WriteAccountFile(type,currentMonthReader,lastMonthReader,effectiveDate.ToString("dd/MM/yyyy"),this.immobile.getId());
+                    FileBD.updateFileImmobile(this.immobile.getId(), id);
                     Thread.Sleep(2000);
                     MessageBox.Show("Cadastro feito com sucesso ! Você será redirecionado para a tela de detalhes");
                     this.Hide();

@@ -44,7 +44,7 @@ namespace TrabFinalPOO
 
             try
             {
-                Customer customer = File.SearchCustomerFileByEmailAndPassword(email,password);
+                Customer customer = FileBD.SearchCustomerFileByEmailAndPassword(email,password);
                 this.Hide();
                 DetailCustomer cs = new DetailCustomer(customer);
                 cs.Show();
