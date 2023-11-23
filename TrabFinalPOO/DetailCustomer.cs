@@ -39,9 +39,9 @@ namespace TrabFinalPOO
 
                     double sumValueAccount = 0;
                     Account accountForGreaterConsumption = null;
-                    double greaterConsumption = -50;
+                    double greaterConsumption = -1;
                     Account accountForGreaterValue = null;
-                    double greaterValue = -50;
+                    double greaterValue = -1;
                     foreach (Account account in this.immobile.getAccounts())
                     {
                         sumValueAccount += account.GetTotalValue();

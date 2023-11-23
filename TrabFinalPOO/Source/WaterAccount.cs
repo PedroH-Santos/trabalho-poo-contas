@@ -129,8 +129,16 @@ namespace TrabFinalPOO.Source
                 }
                 else 
                 {
-                    diffInterval = (this.GetConsumption() > tariffsApplied[i].endInterval) ? diffInterval - (tariffsApplied[i].endInterval - tariffsApplied[i].startInterval) : diffInterval;
                     double mathConsuption = (this.GetConsumption() > tariffsApplied[i].endInterval) ? (tariffsApplied[i].endInterval - tariffsApplied[i].startInterval) : diffInterval;
+                    if (i < tariffsApplied.Count - 1)
+                    {
+                        diffInterval = (this.GetConsumption() > tariffsApplied[i].endInterval) ? diffInterval - (tariffsApplied[i].endInterval - tariffsApplied[i].startInterval) : diffInterval;
+
+                    }
+                    else
+                    {
+                        mathConsuption = diffInterval;
+                    }
                     valueOfWaterTariff += tariffsApplied[i].tableWaterValue * mathConsuption;
                     valueOfSewageTariff += tariffsApplied[i].tableSewageValue * mathConsuption;
                 }

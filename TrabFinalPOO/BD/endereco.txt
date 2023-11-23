@@ -1,3 +1,1 @@
-1|Rio Xingu|32280160|Riacho das Pedras|Contagem|Brasil|1
-2|teste3|teste3|teste3|teste3teste3|teste3
-3|teste5|teste5|teste5|teste5|teste5
+1|Rua rio Xingu|32280160|Riacho das Pedras|Contagem|Brasil

@@ -40,7 +40,7 @@ namespace TrabFinalPOO.Source
             {
                 throw new Exception("É preciso configurar quais foram as leituras do mês anterior e atual.");
             }
-            consumption = this.currentMonthReader - this.lastMonthReader; 
+            consumption = (this.lastMonthReader >= this.currentMonthReader) ? this.lastMonthReader - this.currentMonthReader : this.currentMonthReader - this.lastMonthReader; 
         
         }
         public void SetEffectiveDate(DateTime value) {  effectiveDate = value; }
