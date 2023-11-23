@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrabFinalPOO.Source
 {
-    public class EnergyAccount : Account
+    public class EnergyAccount : Account 
     {
         private double additionalValue;
         private double tariffEnergy;
